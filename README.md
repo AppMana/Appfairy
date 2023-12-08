@@ -1,5 +1,26 @@
-Changes made in this fork:
+# Appfairy Webflow to React Conversion
 
+Converts Webflow exported zip files to coherent React code.
+
+## Usage
+
+1. Export your Webflow site.
+2. Clone this repo.
+3. Place the Webflow export ZIP into a well known place, like inside this repo at `webflow.zip`.
+
+```sh
+# your cloned repo
+cd Appfairy
+# requires node>=18
+corepack enable
+yarn install --immutable
+yarn build
+yarn run appfairy --input webflow.zip --output out
+```
+
+## Changes
+
+- Supports React 18
 - Takes a zip file as input (no need to unzip manually)
 - Render in multiple stages using React components
 - Flexible view API removing the need for `af-el`
@@ -10,17 +31,7 @@ Changes made in this fork:
 - Encapsulation of CSS disabled by default
 - Bugfixes
 
-This version is published in the `@awahlig` scope and can be installed using:
 
-    $ npm install @awahlig/appfairy -g
-
-Original README.md (outdated):
-
-# Appfairy
-
-<p align="center"><img src="https://user-images.githubusercontent.com/7648874/45173702-8e98e700-b23b-11e8-96c7-2426ab03abe0.png" alt="appfairy"></p>
-
-I'm just tired going through a design and translating it into React components. Appfairy is a CLI tool that does that for you - by running a single command the design will be transpiled into React components. As for now Appfairy works with Webflow only for web React apps, but the near future plans are to have that compatible with Sketch and React Native.
 
 ## Methodology
 

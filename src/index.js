@@ -1,6 +1,5 @@
-import cheerio from "cheerio";
+import * as cheerio from "cheerio";
 import path from "path";
-import git from "./git";
 import semver from "semver";
 import { promises as fs } from "fs";
 import { mkdirp } from "fs-extra";
@@ -63,13 +62,6 @@ export const transpile = async (config) => {
     .catch(() => {
       deletedFiles = [];
     });
-
-  // Stop here in "clean" mode
-  if (config.clean) {
-    await git.add(deletedFiles);
-    await git.status();
-    return;
-  }
 
   // Anzip file handlers
   const rules = [
@@ -193,16 +185,11 @@ export const transpile = async (config) => {
   );
   outputFiles.push(config.output.migration);
 
-  // Stage all created/modified/deleted files
-  await git.add([...deletedFiles, ...outputFiles]);
-
-  await git.status();
   console.log("Migration complete!");
   if (deletedFiles.length > 0) {
     console.log(`Removed: ${deletedFiles.length} files`);
   }
   console.log(`Created: ${outputFiles.length} files`);
-  console.log('Use "git commit" now to commit the changes');
 
   if (prevExportDate > exportDate) {
     console.warn(

@@ -1,7 +1,7 @@
-import cheerio from "cheerio";
+import * as cheerio from "cheerio";
 import base32 from "base32";
 import path from "path";
-import statuses from "statuses";
+import { message } from "statuses";
 import uglify from "uglify-js";
 import { promises as fs } from "fs";
 import { mkdirp } from "fs-extra";
@@ -126,7 +126,7 @@ class ViewWriter extends Writer {
 
   set name(name) {
     if (!isNaN(Number(name))) {
-      name = statuses[name];
+      name = message[name];
     }
 
     const words = splitWords(name);

@@ -5,11 +5,12 @@
   "homepage": "https://github.com/AppMana/Appfairy#readme",
   "license": "MIT",
   "main": "build/appfairy.js",
-  "bin": "appfairy",
+  "bin": "./src/appfairy.js",
   "scripts": {
     "build": "webpack --config webpack_config.js",
     "prepublish": "yarn run build",
     "prepack": "yarn run build",
+    "appfairy": "node ./build/appfairy.js",
     "format": "prettier --config .prettierrc 'src/**/*.js' --write"
   },
   "dependencies": {
@@ -18,11 +19,11 @@
     "base32": "^0.0.7",
     "cheerio": "^1.0.0-rc.2",
     "clean-css": "^5.3.3",
-    "execa": "0.11.0",
+    "execa": "^8.0.1",
     "find-root": "^1.1.0",
     "fs-extra": "^11.2.0",
     "minimist": "^1.2.0",
-    "node-fetch": "2.0.0",
+    "node-fetch": "^3.3.2",
     "resolve": "^1.8.1",
     "root-require": "^0.3.1",
     "semver": "^7.3.8",

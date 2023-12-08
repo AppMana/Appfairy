@@ -4,13 +4,11 @@ const nodeExternals = require("webpack-node-externals");
 const ESLintPlugin = require("eslint-webpack-plugin");
 
 module.exports = {
-  devtool: "source-map", // Updated value
-  entry: [path.resolve(__dirname, "src")],
+  devtool: "source-map",
+  entry: ["./src/appfairy.js"],
   output: {
     path: path.resolve(__dirname, "build"),
     filename: "appfairy.js",
-    library: "appfairy",
-    libraryTarget: "commonjs2",
   },
   mode: "none",
   target: "node",
@@ -21,7 +19,6 @@ module.exports = {
         exclude: [/node_modules/],
         use: ["babel-loader"],
       },
-      // Removed json-loader rule
     ],
   },
   plugins: [

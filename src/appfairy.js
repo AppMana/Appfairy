@@ -1,17 +1,14 @@
-#!/usr/bin/env node
-
-const { transpile } = require(".");
-const findRoot = require("find-root");
-const fs = require("fs");
-const minimist = require("minimist");
-const path = require("path");
-const pack = require("./package.json");
+import findRoot from "find-root";
+import fs from "fs";
+import minimist from "minimist";
+import path from "path";
+import { transpile } from "./index.js";
 
 const root = findRoot(process.cwd());
 
 const args = minimist(process.argv.slice(2), {
   string: ["output", "input", "source", "config"],
-  boolean: ["clean", "prefetch", "encapsulate-css", "version", "help"],
+  boolean: ["clean", "prefetch", "encapsulate-css", "help"],
   alias: {
     in: "input",
     out: "output",
@@ -33,68 +30,66 @@ const args = minimist(process.argv.slice(2), {
   },
 });
 
-let { input, output, source, config, clean, prefetch, help, version } = args;
+let { input, output, source, config, clean, prefetch, help } = args;
 let encapsulateCSS = args["encapsulate-css"];
 
 if (help) {
   console.log(`
-usage: appfairy [--version] [--help] [--in | --input <path>] [--out | --output <path>]
+usage: appfairy [--help] [--in | --input <path>] [--out | --output <path>]
                 [--src | --source <name>] [--cfg | --config <path>] [--clean]
-                [--prefetch] [--encapsulate-css]
+                [--prefetch] [--encapsulate-css] [--typescript--ext]
 
 After exporting your Webflow project into a zip file, simply place it in the root of your project as
-\`webflow.zip\` and run \`$ appfairy\`. After doing so you'll notice that new files have been created
-in your project and that they have been automatically staged for a git commit. At this point feel free
-to commit those changes.
+\`webflow.zip\` and run \`$ appfairy\`.
 
 The changes consist of the following files (regardless if they were added, modified or deleted):
 
-- **public/** (public assets which should be served by our app's server)
+- public/ (public assets which should be served by our app's server)
 
-  - **images/**
+  - images/
 
-  - **fonts/**
+  - fonts/
 
-  - **css/**
+  - css/
 
-- **src/**
+- src/
 
-  - **scripts/** (scripts that should be imported in index.js)
+  - scripts/ (scripts that should be imported in index.js)
 
-  - **styles/** (css files that should be imported in index.js)
+  - styles/ (css files that should be imported in index.js)
 
-  - **views/**
+  - views/
 
 The output can be controlled using a config file named \`af_config.js\` which should be located in
 the root of the project. The config file may (or may not) include some of the following options:
 
-- **prefetch (boolean)** - Prefetch the styles and scripts which are necessary for the design to work.
+- prefetch (boolean) - Prefetch the styles and scripts which are necessary for the design to work.
   If not specified, the scripts and styles will be fetched during runtime.
 
-- **encapsulateCSS (boolean)** - Encapsulate all CSS in af-classes. If not specified, CSS will not be
+- encapsulateCSS (boolean) - Encapsulate all CSS in af-classes. If not specified, CSS will not be
   encapsulated.
 
-- **source (source)** - Can either be set to \`webflow\`, \`sketch\` and represents the studio name that
+- source (source) - Can either be set to \`webflow\`, \`sketch\` and represents the studio name that
   generated the basic CSS and HTML assets. If not set there will be little to no difference in the
   transpilation process but it will however make the CSS encapsulation more accurate.
 
-- **input (string)** - The input zip file exported from Webflow. Defaults to \`webflow.zip\` in the
+- input (string) - The input zip file exported from Webflow. Defaults to \`webflow.zip\` in the
   root of the project.
 
-- **output (string/object)** - If a string was provided, the output will be mapped to the specified dir.
+- output (string/object) - If a string was provided, the output will be mapped to the specified dir.
   If an object, each key in the object will map its asset type to the specified dir in the value.
   The object has the following schema:
 
-  - **public (string)** - Public dir. Defaults to \`public\`.
+  - public (string) - Public dir. Defaults to \`public\`.
 
-  - **src (string/object)** - Source dir. If a string is provided, all its content will be mapped to the
+  - src (string/object) - Source dir. If a string is provided, all its content will be mapped to the
     specified dir, otherwise the mapping will be done according to the following object:
 
-    - **scripts (string)** - Scripts dir. Defaults to \`src/scripts\`.
+    - scripts (string) - Scripts dir. Defaults to \`src/scripts\`.
 
-    - **styles (string)** - Styles dir. Defaults to \`src/styles\`.
+    - styles (string) - Styles dir. Defaults to \`src/styles\`.
 
-    - **views (string)** - Views dir. Defaults to \`src/views\`.
+    - views (string) - Views dir. Defaults to \`src/views\`.
 
 Alternatively, you may provide (extra) options through the command line like the following:
 
@@ -102,29 +97,20 @@ Alternatively, you may provide (extra) options through the command line like the
 
 The CLI tool supports the following options:
 
-- **--clean**
+- --clean
 
-- **--prefetch**
+- --prefetch
 
-- **--encapsulate-css**
+- --encapsulate-css
 
-- **--source/--src**
+- --source/--src
 
-- **--input/--in**
+- --input/--in
 
-- **--output/--out**
+- --output/--out
 
-- **--config**
-
-The behavior of Appfairy will change according to the specified options as detailed above,
-and the rest is self explanatory.
+- --config
 `);
-
-  process.exit(0);
-}
-
-if (version) {
-  console.log(`appfairy version ${pack.version}`);
 
   process.exit(0);
 }
