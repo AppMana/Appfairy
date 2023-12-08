@@ -29,7 +29,7 @@ export type AnySock = string | { "": string };
  */
 export function defineSock<P extends string, T extends SockSpec>(
   name: P,
-  spec: T
+  spec: T,
 ): Sock<P, T>;
 
 export function resolveSock(sock: AnySock): string;

@@ -1,7 +1,6 @@
 import * as readline from "readline";
 export { default as Internal } from "./internal";
 export { default as requireText } from "./requireText";
-export { default as HTMLtoJSX } from "./htmltojsx";
 
 // Appfairy version
 export const version = require("root-require")("./package.json").version;
@@ -38,7 +37,7 @@ export const encapsulateCSS = (css, source) => {
         .replace(/\.([\w_-]+)/g, ".af-class-$1")
         .replace(
           /\[class(.?)="( ?)([^"]+)( ?)"\]/g,
-          '[class$1="$2af-class-$3$4"]'
+          '[class$1="$2af-class-$3$4"]',
         )
         .replace(/([^\s][^,]*)(\s*,?)/g, ".af-view $1$2")
         .replace(/\.af-view html/g, ".af-view")
@@ -53,7 +52,7 @@ export const encapsulateCSS = (css, source) => {
             .replace(/af-class-anima-/g, "anima-")
             .replace(
               /af-class-([\w_-]+)an-animation([\w_-]+)/g,
-              "$1an-animation$2"
+              "$1an-animation$2",
             );
           break;
         default:
@@ -62,12 +61,12 @@ export const encapsulateCSS = (css, source) => {
             .replace(/af-class-anima-/g, "anima-")
             .replace(
               /af-class-([\w_-]+)an-animation([\w_-]+)/g,
-              "$1an-animation$2"
+              "$1an-animation$2",
             );
       }
 
       return `${left}${rule}${right}`;
-    }
+    },
   );
 };
 
@@ -86,7 +85,7 @@ export const freeText = (text) => {
         .split("\n")
         .map((line) => (line ? `${baseIndent}${line}` : ""))
         .join("\n");
-    }
+    },
   );
 
   const lines = text.split("\n");

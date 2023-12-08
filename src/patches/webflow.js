@@ -26,7 +26,7 @@ window.__defineSetter__("Webflow", (Webflow) => {
               .replace(/\.([\w_-]+)/g, ".af-class-$1")
               .replace(
                 /\[class(.?)="( ?)([^"]+)( ?)"\]/g,
-                '[class$1="$2af-class-$3$4"]'
+                '[class$1="$2af-class-$3$4"]',
               );
           }
         });

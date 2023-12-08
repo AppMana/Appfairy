@@ -33,7 +33,7 @@ class StyleWriter extends Writer {
   }
 
   set encapsulateCSS(encapsulateCSS) {
-    return (this[_].encapsulateCSS = !!encapsulateCSS);
+    this[_].encapsulateCSS = !!encapsulateCSS;
   }
 
   get prefetch() {
@@ -41,7 +41,7 @@ class StyleWriter extends Writer {
   }
 
   set prefetch(prefetch) {
-    return (this[_].prefetch = !!prefetch);
+    this[_].prefetch = !!prefetch;
   }
 
   get baseUrl() {
@@ -122,12 +122,12 @@ class StyleWriter extends Writer {
       const sheet = style.body
         ? style.body
         : /^http/.test(style.href)
-        ? await fetch(style.href).then((res) => res.text())
-        : await requireText.fromZip(this.baseUrl, style.href);
+          ? await fetch(style.href).then((res) => res.text())
+          : await requireText.fromZip(this.baseUrl, style.href);
 
       return fs.writeFile(
         `${dir}/${styleFileName}`,
-        this[_].transformSheet(sheet)
+        this[_].transformSheet(sheet),
       );
     });
 

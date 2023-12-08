@@ -29,7 +29,7 @@ class ScriptWriter extends Writer {
   }
 
   set prefetch(prefetch) {
-    return (this[_].prefetch = !!prefetch);
+    this[_].prefetch = !!prefetch;
   }
 
   get baseUrl() {

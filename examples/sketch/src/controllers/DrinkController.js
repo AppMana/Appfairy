@@ -1,5 +1,5 @@
-import React from 'react'
-import DrinkView from '../views/DrinkView'
+import React from "react";
+import DrinkView from "../views/DrinkView";
 
 class DrinkController extends React.Component {
   render() {
@@ -7,12 +7,12 @@ class DrinkController extends React.Component {
       <DrinkView>
         <close onClick={this.close} />
       </DrinkView>
-    )
+    );
   }
 
   close = () => {
-    this.props.history.goBack()
-  }
+    this.props.history.goBack();
+  };
 }
 
-export default DrinkController
+export default DrinkController;

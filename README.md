@@ -29,14 +29,14 @@ Since machine generated assets aren't very easy to maintain due to their complex
 Here's an example of a possible controller:
 
 ```js
-import { useState } from 'react';
-import { ConsultFormView, sock } from '../views/ConsultFormView'
+import { useState } from "react";
+import { ConsultFormView, sock } from "../views/ConsultFormView";
 
 const ConsultFormController = () => {
-  const [name, setName] = useState('')
-  const [phone, setPhone] = useState('')
-  const [email, setEmail] = useState('')
-  const [description, setDescription] = useState('')
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [description, setDescription] = useState("");
 
   const submit = () => {
     alert(`
@@ -44,26 +44,24 @@ const ConsultFormController = () => {
       ${phone}
       ${email}
       ${description}
-    `)
-  }
+    `);
+  };
 
   return (
     <ConsultFormView>
-      <input af-sock={sock.name}
-             onChange={e => setName(e.target.value)} />
-      <input af-sock={sock.phone}
-             onChange={e => setPhone(e.target.value)} />
-      <input af-sock={sock.email}
-             onChange={e => setEmail(e.target.value)} />
-      <input af-sock={sock.description}
-             onChange={e => setDescription(e.target.value)} />
-      <input af-sock={sock.submit}
-             onClick={submit} />
+      <input af-sock={sock.name} onChange={(e) => setName(e.target.value)} />
+      <input af-sock={sock.phone} onChange={(e) => setPhone(e.target.value)} />
+      <input af-sock={sock.email} onChange={(e) => setEmail(e.target.value)} />
+      <input
+        af-sock={sock.description}
+        onChange={(e) => setDescription(e.target.value)}
+      />
+      <input af-sock={sock.submit} onClick={submit} />
     </ConsultFormView>
-  )
-}
+  );
+};
 
-export default ConsultFormController
+export default ConsultFormController;
 ```
 
 This way the view can be changed without us worrying about re-binding the event listeners and props.

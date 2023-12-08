@@ -8,7 +8,7 @@ import { mkdirp } from "fs-extra";
 import raw from "../raw";
 import Writer from "./writer";
 import CleanCSS from "clean-css";
-
+import HTMLtoJSX from "@appmana/html-to-jsx";
 import {
   encapsulateCSS,
   escape,
@@ -18,7 +18,6 @@ import {
   splitWords,
   upperFirst,
   absoluteHref,
-  HTMLtoJSX,
 } from "../utils";
 
 const _ = Symbol("_ViewWriter");
@@ -56,7 +55,7 @@ class ViewWriter extends Writer {
           })
           .map(
             (view) =>
-              `export { ${view.viewName}, ${view.sockName} } from "./${view.viewName}";`
+              `export { ${view.viewName}, ${view.sockName} } from "./${view.viewName}";`,
           );
 
         const importPath = (name) => {
@@ -66,8 +65,8 @@ class ViewWriter extends Writer {
 
         index.push(
           `\nexport { Render, Plug, Swap, Proxy, defineSock } from "${importPath(
-            "./helpers"
-          )}";`
+            "./helpers",
+          )}";`,
         );
 
         const indexFilePath = `${dir}/${folder}/index.js`;
@@ -77,15 +76,15 @@ class ViewWriter extends Writer {
         index.pop();
         index.push(
           `\nexport { Render, Plug, Swap, Proxy, defineSock, Sock } from "${importPath(
-            "./helpers"
-          )}";`
+            "./helpers",
+          )}";`,
         );
 
         const indexDtsFilePath = `${dir}/${folder}/index.d.ts`;
         await fs.writeFile(indexDtsFilePath, freeLint(index.join("\n")));
 
         outputFiles.push(indexFilePath, indexDtsFilePath);
-      }
+      },
     );
 
     const writingHelpers = (async () => {
@@ -196,7 +195,7 @@ class ViewWriter extends Writer {
               .replace(/af-class-anima-/g, "anima-")
               .replace(
                 /af-class-([\w_-]+)an-animation([\w_-]+)/g,
-                "$1an-animation$2"
+                "$1an-animation$2",
               );
             break;
           default:
@@ -205,7 +204,7 @@ class ViewWriter extends Writer {
               .replace(/af-class-anima-/g, "anima-")
               .replace(
                 /af-class-([\w_-]+)an-animation([\w_-]+)/g,
-                "$1an-animation$2"
+                "$1an-animation$2",
               );
         }
 
@@ -333,7 +332,7 @@ class ViewWriter extends Writer {
 
       const group = getSockParents($el).reduce(
         (acc, el) => acc[$(el).attr("af-sock")].sockets,
-        sockets
+        sockets,
       );
       group[sock] = { desc, sockets: {} };
 
@@ -417,7 +416,7 @@ class ViewWriter extends Writer {
 
   async write(dir) {
     const filePath = path.normalize(
-      `${dir}/${this.folder}/${this.viewName}.js`
+      `${dir}/${this.folder}/${this.viewName}.js`,
     );
     await mkdirp(path.dirname(filePath));
     await fs.writeFile(filePath, this[_].compose());
@@ -444,7 +443,7 @@ class ViewWriter extends Writer {
   _compose() {
     return freeLint(`
       import { View, Hatch, defineSock } from "${this[_].importPath(
-        "./helpers"
+        "./helpers",
       )}";
 
       ==>${this[_].composeView("export const ")}<==
@@ -576,7 +575,7 @@ class ViewWriter extends Writer {
 
   _composeWfData() {
     const content = Array.from(this[_].wfData).map(
-      ([attr, value]) => `${attr}: "${value}",`
+      ([attr, value]) => `${attr}: "${value}",`,
     );
 
     return freeText(`
@@ -604,9 +603,9 @@ class ViewWriter extends Writer {
             const { sock } = decode(encoded);
             const elAndAttrs = `${el} ${attrs.trimStart()}`.trimEnd();
             return `<Hatch sock="${sock}"><${elAndAttrs}>${this[_].bindJSX(
-              content
+              content,
             )}</${el}></Hatch>`;
-          }
+          },
         )
         // Self closing
         .replace(
@@ -615,7 +614,7 @@ class ViewWriter extends Writer {
             const { sock } = decode(encoded);
             const elAndAttrs = `${el} ${attrs.trimStart()}`.trimEnd();
             return `<Hatch sock="${sock}"><${elAndAttrs} /></Hatch>`;
-          }
+          },
         )
     );
   }

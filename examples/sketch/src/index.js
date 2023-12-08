@@ -1,21 +1,18 @@
-import './index.css';
-import loadingScripts from './scripts';
-import loadingStyles from './styles';
+import "./index.css";
+import loadingScripts from "./scripts";
+import loadingStyles from "./styles";
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
-import registerServiceWorker from './registerServiceWorker';
-import HomeController from './controllers/HomeController'
-import BurgerController from './controllers/BurgerController'
-import CowController from './controllers/CowController'
-import DrinkController from './controllers/DrinkController'
-import ProjectController from './controllers/ProjectpageController'
+import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import registerServiceWorker from "./registerServiceWorker";
+import HomeController from "./controllers/HomeController";
+import BurgerController from "./controllers/BurgerController";
+import CowController from "./controllers/CowController";
+import DrinkController from "./controllers/DrinkController";
+import ProjectController from "./controllers/ProjectpageController";
 
-Promise.all([
-  loadingScripts,
-  loadingStyles,
-]).then(() => {
+Promise.all([loadingScripts, loadingStyles]).then(() => {
   ReactDOM.render(
     <BrowserRouter>
       <Switch>
@@ -25,7 +22,8 @@ Promise.all([
         <Route exact path="/drink" component={DrinkController} />
         <Route exact path="/project" component={ProjectController} />
       </Switch>
-    </BrowserRouter>
-  , document.getElementById('root'));
+    </BrowserRouter>,
+    document.getElementById("root"),
+  );
   registerServiceWorker();
-})
+});

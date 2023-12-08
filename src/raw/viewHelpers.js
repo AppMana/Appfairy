@@ -247,7 +247,7 @@ function renderPlug(item, template) {
           item.key ? { key: item.key } : null,
           proxy.props,
           proxy.key ? { key: proxy.key } : null,
-          proxy.ref ? { ref: proxy.ref } : null
+          proxy.ref ? { ref: proxy.ref } : null,
         )}
       />
     );
@@ -280,8 +280,8 @@ export function defineSock(name, spec) {
           const fn = `${name}.${k}`;
           return [k, v ? defineSock(fn, v) : fn];
         })
-        .concat([["", name]])
-    )
+        .concat([["", name]]),
+    ),
   );
 }
 

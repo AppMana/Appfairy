@@ -1,5 +1,5 @@
-import React from 'react'
-import BurgerView from '../views/BurgerView'
+import React from "react";
+import BurgerView from "../views/BurgerView";
 
 class BurgerController extends React.Component {
   render() {
@@ -7,12 +7,12 @@ class BurgerController extends React.Component {
       <BurgerView>
         <close onClick={this.close} />
       </BurgerView>
-    )
+    );
   }
 
   close = () => {
-    this.props.history.goBack()
-  }
+    this.props.history.goBack();
+  };
 }
 
-export default BurgerController
+export default BurgerController;

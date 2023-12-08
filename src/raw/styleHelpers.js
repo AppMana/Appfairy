@@ -40,6 +40,6 @@ export const loadStyles = (styles) => {
 
       loadingStyles[key] = loading;
       return loading;
-    })
+    }),
   );
 };

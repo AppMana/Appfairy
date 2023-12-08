@@ -1,5 +1,5 @@
-import React from 'react'
-import CowView from '../views/CowView'
+import React from "react";
+import CowView from "../views/CowView";
 
 class CowController extends React.Component {
   render() {
@@ -7,12 +7,12 @@ class CowController extends React.Component {
       <CowView>
         <close onClick={this.props.close} />
       </CowView>
-    )
+    );
   }
 
   close = () => {
-    this.props.history.goBack()
-  }
+    this.props.history.goBack();
+  };
 }
 
-export default CowController
+export default CowController;

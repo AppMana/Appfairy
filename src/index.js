@@ -26,17 +26,17 @@ export const transpile = async (config) => {
       if (mver && semver.gt(mver, version)) {
         console.warn(
           `Warning! Previous migration is from a newer version ` +
-            `of appfairy\n${mver} > ${version}`
+            `of appfairy\n${mver} > ${version}`,
         );
         await askToContinue();
       }
       prevExportDate = new Date(migration.exportDate);
       deletedFiles = migration.generatedFiles.map((file) =>
-        path.join(path.dirname(config.output.migration), file)
+        path.join(path.dirname(config.output.migration), file),
       );
       deletedFiles.push(config.output.migration);
       await Promise.all(
-        deletedFiles.map((file) => fs.rm(file, { force: true }))
+        deletedFiles.map((file) => fs.rm(file, { force: true })),
       );
 
       // Remove remaining empty directories
@@ -46,10 +46,10 @@ export const transpile = async (config) => {
             .map((file) =>
               // Collect all parents a/b/c/d => [a, a/b, a/b/c]
               [...file.matchAll(/\//g)].map((match) =>
-                file.slice(0, match.index)
-              )
+                file.slice(0, match.index),
+              ),
             )
-            .flat()
+            .flat(),
         ),
       ] // flatten and find unique
         .sort()
@@ -145,7 +145,7 @@ export const transpile = async (config) => {
   const writingFiles = Promise.all(transpilingHTMLFiles).then((viewWriters) => {
     return Promise.all([
       ViewWriter.writeAll(viewWriters, config.output.src.views).then((paths) =>
-        outputFiles.push(...paths)
+        outputFiles.push(...paths),
       ),
       scriptWriter
         .write(config.output.src.scripts)
@@ -163,7 +163,7 @@ export const transpile = async (config) => {
       await mkdirp(path.dirname(filename));
       await fs.writeFile(filename, css);
       return filename;
-    })
+    }),
   ).then((paths) => {
     if (paths.length > 0) {
       console.log(`Encapsulated ${paths.length} css files`);
@@ -185,11 +185,11 @@ export const transpile = async (config) => {
         .map((file) =>
           path
             .relative(path.dirname(config.output.migration), file)
-            .replace(/\\/g, "/")
+            .replace(/\\/g, "/"),
         )
         .sort(),
     },
-    { spaces: 2 }
+    { spaces: 2 },
   );
   outputFiles.push(config.output.migration);
 
@@ -207,7 +207,7 @@ export const transpile = async (config) => {
   if (prevExportDate > exportDate) {
     console.warn(
       `\nWarning! Previous migration was from a newer input file\n` +
-        `${prevExportDate.toISOString()} > ${exportDate.toISOString()}`
+        `${prevExportDate.toISOString()} > ${exportDate.toISOString()}`,
     );
   }
 };
@@ -216,7 +216,7 @@ const transpileHTMLFile = async (
   config,
   htmlFile,
   scriptWriter,
-  styleWriter
+  styleWriter,
 ) => {
   console.log(`Transpiling ${htmlFile.name}`);
 

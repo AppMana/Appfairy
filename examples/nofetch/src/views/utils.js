@@ -1,23 +1,23 @@
 /* eslint-disable */
 
-const React = require('react')
+const React = require("react");
 
 exports.transformProxies = (children) => {
-  const proxies = {}
+  const proxies = {};
 
   React.Children.forEach(children, (child) => {
-    const props = proxies[child.type] = Object.assign({}, child.props)
+    const props = (proxies[child.type] = Object.assign({}, child.props));
 
     if (child.key != null) {
-      props.key = child.key
+      props.key = child.key;
     }
 
     if (child.ref != null) {
-      props.ref = child.ref
+      props.ref = child.ref;
     }
-  })
+  });
 
-  return proxies
-}
+  return proxies;
+};
 
 /* eslint-enable */

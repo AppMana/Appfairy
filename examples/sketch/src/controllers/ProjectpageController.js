@@ -1,10 +1,10 @@
-import React from 'react'
-import ProjectView from '../views/ProjectpageView'
+import React from "react";
+import ProjectView from "../views/ProjectpageView";
 
 class ProjectController extends React.Component {
   state = {
-    showingMenu: false
-  }
+    showingMenu: false,
+  };
 
   render() {
     return (
@@ -18,20 +18,20 @@ class ProjectController extends React.Component {
           />
         )}
       </ProjectView>
-    )
+    );
   }
 
   showMenu = () => {
     this.setState({
-      showingMenu: true
-    })
-  }
+      showingMenu: true,
+    });
+  };
 
   hideMenu = () => {
     this.setState({
-      showingMenu: false
-    })
-  }
+      showingMenu: false,
+    });
+  };
 }
 
-export default ProjectController
+export default ProjectController;

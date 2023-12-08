@@ -1,11 +1,11 @@
-import React from 'react'
-import HomeView from '../views/HomeView'
-import MenuOverlayController from './MenuoverlayController'
+import React from "react";
+import HomeView from "../views/HomeView";
+import MenuOverlayController from "./MenuoverlayController";
 
 class HomeController extends React.Component {
   state = {
-    showingMenu: false
-  }
+    showingMenu: false,
+  };
 
   render() {
     return (
@@ -24,32 +24,32 @@ class HomeController extends React.Component {
           />
         )}
       </React.Fragment>
-    )
+    );
   }
 
   showMenu = () => {
     this.setState({
-      showingMenu: true
-    })
-  }
+      showingMenu: true,
+    });
+  };
 
   hideMenu = () => {
     this.setState({
-      showingMenu: false
-    })
-  }
+      showingMenu: false,
+    });
+  };
 
   navCow = () => {
-    this.props.history.push('/cow')
-  }
+    this.props.history.push("/cow");
+  };
 
   navBurger = () => {
-    this.props.history.push('/burger')
-  }
+    this.props.history.push("/burger");
+  };
 
   navDrink = () => {
-    this.props.history.push('/drink')
-  }
+    this.props.history.push("/drink");
+  };
 }
 
-export default HomeController
+export default HomeController;

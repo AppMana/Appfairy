@@ -1,5 +1,5 @@
-import execa from "execa";
 import path from "path";
+import { execa } from "execa";
 
 // Will add given files and will ignore those who aren't exist
 export const add = async (files) => {
