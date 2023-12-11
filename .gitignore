@@ -1,3 +1,4 @@
+.DS_Store
 ./webflow.zip
 /build
 /node_modules

@@ -18,6 +18,20 @@ yarn build
 yarn run appfairy --input webflow.zip --output out
 ```
 
+Then, to use a view corresponding to a page, like `IndexView`, in your application:
+
+```tsx
+const IndexPage = () => {
+  return (
+          <IndexView>
+            <Render />
+          </IndexView>
+  );
+};
+
+export default IndexPage;
+```
+
 ## Changes
 
 - Supports React 18

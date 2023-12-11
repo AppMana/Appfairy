@@ -53,6 +53,7 @@ export const View = ({ scripts, styles, wfData, noWebflow, ...props }) => {
     if (!noWebflow && Webflow && loaded) {
       Webflow.ready();
       Webflow.require("ix2")?.init();
+      document.dispatchEvent(new Event("readystatechange"));
     }
   }, [loaded, noWebflow]);
 
